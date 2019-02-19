@@ -1,0 +1,10 @@
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\obj\Debug\13-ServidorPPTFullDuplex.csprojAssemblyReference.cache
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\obj\Debug\_13_ServidorPPTFullDuplex.Form1.resources
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\obj\Debug\_13_ServidorPPTFullDuplex.Properties.Resources.resources
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\obj\Debug\13-ServidorPPTFullDuplex.csproj.GenerateResource.cache
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\obj\Debug\13-ServidorPPTFullDuplex.csproj.CoreCompileInputs.cache
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\bin\Debug\13-ServidorPPTFullDuplex.exe.config
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\bin\Debug\13-ServidorPPTFullDuplex.exe
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\bin\Debug\13-ServidorPPTFullDuplex.pdb
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\obj\Debug\13-ServidorPPTFullDuplex.exe
+C:\Users\luis.ACARBALLEIRA\Desktop\Sockets2018\13-ServidorPPTFullDuplex\obj\Debug\13-ServidorPPTFullDuplex.pdb
