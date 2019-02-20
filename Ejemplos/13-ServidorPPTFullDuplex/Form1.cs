@@ -35,7 +35,9 @@ namespace _13_ServidorPPTFullDuplex
 
         Object o = new object(); //para lock
 
-        int puntos2 = 0; public Form1()
+        int puntos2 = 0;
+
+        public Form1()
         {
             InitializeComponent();
         }
