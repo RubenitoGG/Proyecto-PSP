@@ -19,6 +19,9 @@ namespace Servidor
     {
         string nombreJ1;
         string nombreJ2;
+        string ipJ1;
+        string ipJ2;
+
         int ronda = 1;
         List<string> colores;
         string ganador;
@@ -80,6 +83,7 @@ namespace Servidor
                         else if (nombreJ1 == "") // GUARDAMOS JUGADOR 1:
                         {
                             nombreJ1 = data[1];
+                            ipJ1 = cliente.Client.RemoteEndPoint.ToString().Split(':')[0];
 
                             // ENVIAMOS RESPUESTA AL JUGADOR CON SU NÚMERO:
                             writer.WriteLine("@OK@1@");
@@ -88,6 +92,7 @@ namespace Servidor
                         else if (nombreJ2 == "") // GUARDAMOS JUGADOR 2:
                         {
                             nombreJ2 = data[1];
+                            ipJ2 = cliente.Client.RemoteEndPoint.ToString().Split(':')[0];
 
                             // ENVIAMOS RESPUESTA AL JUGADOR CON SU NÚMERO:
                             writer.WriteLine("@OK@2@");
