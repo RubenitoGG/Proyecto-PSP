@@ -34,7 +34,9 @@ namespace Servidor
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Thread t = new Thread(this.EsperarClientes);
+            t.Start();
+            button1.Enabled = false;
         }
 
         /// <summary>

@@ -1,0 +1,26 @@
+﻿<Window x:Class="Cliente.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cliente"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="txt_ip" HorizontalAlignment="Left" Height="23" Margin="662,386,0,0" TextWrapping="Wrap" Text="192.168.0.15" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Conectarse" HorizontalAlignment="Left" Margin="553,386,0,0" VerticalAlignment="Top" Width="93" Height="23" Click="Button_Click"/>
+        <TextBox x:Name="txt_conexion" HorizontalAlignment="Left" Height="23" Margin="328,386,0,0" TextWrapping="Wrap" Text="Desconectado" VerticalAlignment="Top" Width="120" TextAlignment="Center" BorderBrush="#00ABADB3" Foreground="#FFB01D1D" IsReadOnly="True"/>
+        <TextBox x:Name="txt_nombre" HorizontalAlignment="Left" Height="23" Margin="662,358,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Nombre: " HorizontalAlignment="Left" Margin="586,358,0,0" VerticalAlignment="Top"/>
+        <Rectangle Fill="#7FEE7B7B" HorizontalAlignment="Left" Height="218" Margin="27,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <Rectangle Fill="#7F23C732" HorizontalAlignment="Left" Height="218" Margin="152,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <Rectangle Fill="#7F2067CD" HorizontalAlignment="Left" Height="218" Margin="279,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <Rectangle Fill="#7FEDF710" HorizontalAlignment="Left" Height="218" Margin="409,19,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btn_rojo" Content="Rojo" HorizontalAlignment="Left" Margin="27,253,0,0" VerticalAlignment="Top" Width="100" Height="37" Click="btn_rojo_Click"/>
+        <Button x:Name="btn_verde" Content="Verde" HorizontalAlignment="Left" Margin="152,253,0,0" VerticalAlignment="Top" Width="100" Height="37" Click="btn_verde_Click"/>
+        <Button x:Name="btn_azul" Content="Azul" HorizontalAlignment="Left" Margin="279,253,0,0" VerticalAlignment="Top" Width="100" Height="37" Click="btn_azul_Click"/>
+        <Button x:Name="btn_amarillo" Content="Amarillo" HorizontalAlignment="Left" Margin="409,253,0,0" VerticalAlignment="Top" Width="100" Height="37" Click="btn_amarillo_Click"/>
+        <Button Content="Comprobar colores" HorizontalAlignment="Left" Margin="546,19,0,0" VerticalAlignment="Top" Width="229" Height="71" Click="Button_Click_1"/>
+        <Button Content="Enviar colores" HorizontalAlignment="Left" Margin="546,109,0,0" VerticalAlignment="Top" Width="229" Height="71" Click="Button_Click_2"/>
+    </Grid>
+</Window>
