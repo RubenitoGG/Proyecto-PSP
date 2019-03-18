@@ -24,12 +24,18 @@ namespace Servidor
 
         int ronda = 1;
         List<string> colores;
-        string ganador;
+        bool ganador;
 
         public Form1()
         {
             InitializeComponent();
             colores = new List<string>();
+
+            ronda = 1;
+            nombreJ1 = "";
+            nombreJ2 = "";
+
+            ganador = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,6 +79,17 @@ namespace Servidor
                 try
                 {
                     string[] data = reader.ReadLine().Split('@');
+                    
+                    if (ganador)
+                    {
+                        writer.WriteLine("@NOK@2A@");
+                        writer.Flush();
+
+                        cliente.Close();
+                        netStream.Close();
+
+                        return;
+                    }
 
                     #region -Inscribir-
                     if (data[1] == "INSCRIBIR")
@@ -110,61 +127,84 @@ namespace Servidor
                     #region -Jugada-
                     else if (data[1] == "JUGADA")
                     {
-                        if(ganador != null)
-                        {
-                            writer.WriteLine("Has ganado!");
-                            writer.Flush();
-                            cliente.Close();
-                        }
+                        bool r = true;
+                        //Debug.WriteLine(ronda);
 
-                        if (nombreJ1 == "" || nombreJ2 == "") // SI NO HAY DOS JUGADORES DEVUELVE UN ERROR:
+                        if (ronda % 2 == 0) // ronda par == jugador 2
                         {
-                            writer.WriteLine("@NOK@1A@");
-                            writer.Flush();
-                        }
-                        else
-                        {
-                            // RECOGEMOS LA LISTA DE COLORES:
-                            List<string> colores = new List<string>();
-                            for (int i = 2; i < data.Length - 2; i++) // NO SEGURO SI ES -1 O -2.
+                            if (Convert.ToInt32(data[2]) != 2)
                             {
-                                colores.Add(data[i]);
+                                writer.WriteLine("@NOK@1C@");
+                                writer.Flush();
+                                r = false;
                             }
-                            // COMPROBAMOS QUE NO HAY COLORES DE MENOS NI DE MÁS:
-                            if(colores.Count() == ronda)
+                        }
+                        else //ronda impar == jugador 1
+                        {
+                            if (Convert.ToInt32(data[2]) == 2)
                             {
-                                for (int i = 0; i < colores.Count() - 1; i++) // NO SEGURO SI ES -1 O -2.
+                                writer.WriteLine("@NOK@1C@");
+                                writer.Flush();
+                                r = false;
+                            }
+                        }
+
+                        // TU TURNO:
+                        if (r)
+                        {
+                            Debug.WriteLine(ronda);
+                            
+                            if (nombreJ1 == "" || nombreJ2 == "") // SI NO HAY DOS JUGADORES DEVUELVE UN ERROR:
+                            {
+                                writer.WriteLine("@NOK@1A@");
+                                writer.Flush();
+                            }
+                            else
+                            {
+                                // RECOGEMOS LA LISTA DE COLORES:
+                                List<string> nuevosColores = new List<string>();
+                                for (int i = 3; i < data.Length - 1; i++)
                                 {
-                                    // COMPROBAMOS COLOR A COLOR SI ESTÁN EN ORDEN:
-                                    if(colores.ElementAt(i) != this.colores.ElementAt(i))
+                                    nuevosColores.Add(data[i]);
+                                    Debug.WriteLine(data[i]);
+                                }
+                                // COMPROBAMOS QUE NO HAY COLORES DE MENOS NI DE MÁS:
+                                if (nuevosColores.Count() == ronda)
+                                {
+                                    // COMPROBAMOS LOS COLORES:
+                                    if (ComprobarLista(nuevosColores))
                                     {
-                                        writer.WriteLine("@OK@INCORRECTO@");  // MESANJE DE COLORES INCORRECTOS.
+                                        writer.WriteLine("@OK@CORRECTO@");
                                         writer.Flush();
-
-                                        // NOMBRAMOS GANADOR:
-                                        if (ronda % 2 == 0)
-                                            ganador = nombreJ1;
-                                        else
-                                            ganador = nombreJ2;
-
-                                        cliente.Close();
-                                    }
-
-                                    // SI AÚN NO HAY GANADOR:
-                                    if(ganador == null)
-                                    {
                                         ronda++;
-                                        writer.WriteLine("@OK@CORRECTO@"); // MENSAJE DE COLORES CORRECTOS.
+                                    }
+                                    else
+                                    {
+                                        ganador = true;
+                                        writer.WriteLine("@OK@INCORRECTO@");
                                         writer.Flush();
                                     }
                                 }
-                            }
-                            else // ERROR DE NÚMERO DE COLORES INCORRECTO.
-                            {
-                                writer.WriteLine("@NOK@1B@");
-                                writer.Flush();
+                                else // ERROR DE NÚMERO DE COLORES INCORRECTO.
+                                {
+                                    writer.WriteLine("@NOK@1B@");
+                                    writer.Flush();
+                                }
                             }
                         }
+                    }
+                    #endregion
+                    #region -VerLista-
+                    else if (data[1] == "VER")
+                    {
+                        string envio = "@";
+                        foreach (string c in colores)
+                        {
+                            envio += c + "@";
+                        }
+
+                        writer.WriteLine(envio);
+                        writer.Flush();
                     }
                     #endregion
                 }
@@ -173,6 +213,30 @@ namespace Servidor
                     Debug.WriteLine(error.ToString());
                 }
             }
+        }
+
+        private bool ComprobarLista(List<string> nuevosColores)
+        {
+            string ultimo = nuevosColores.ElementAt(nuevosColores.Count() - 1);
+
+            // Cogemos los colores a comprobar:
+            nuevosColores.RemoveAt(nuevosColores.Count() - 1);
+
+            if (colores.Count == 0)
+            {
+                this.colores.Add(ultimo);
+                return true;
+            }
+
+            for (int i = 0; i < nuevosColores.Count(); i++)
+            {
+                Console.WriteLine(nuevosColores.ElementAt(i) + " --- " + this.colores.ElementAt(i));
+                if (nuevosColores.ElementAt(i) != this.colores.ElementAt(i))
+                    return false;
+            }
+
+            this.colores.Add(ultimo);
+            return true;
         }
     }
 }
